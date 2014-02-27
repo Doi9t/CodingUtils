@@ -1,0 +1,6 @@
+{
+    "put_splitter_between_multiple_numbers": true,
+    "splitter_between_multiple_numbers": " - ",
+    "put_splitter_between_multiple_strings": true,
+    "splitter_between_multiple_strings": " - "
+} 

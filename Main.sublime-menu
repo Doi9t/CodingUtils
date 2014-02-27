@@ -1,0 +1,62 @@
+[
+    {
+        "caption": "Tools",
+        "mnemonic": "T",
+        "id": "tools",
+        "children":
+        [
+            {
+                "caption": "Doi9t's packages",
+                "mnemonic": "d",
+                "id": "menu_doi9t",
+                "children":
+                [
+
+                    {
+                        "caption": "CodingUtils",
+                        "mnemonic": "c",
+                        "id": "menu_doi9t_cu",
+                        "children":
+                        [
+                            {
+                                "caption": "codingUtils: Keep only letter",
+                                "command": "codeuti",
+                                "args": {"util": "keepLet"}
+                            },
+                            {
+                                "caption": "codingUtils: Keep only binary",
+                                "command": "codeuti",
+                                "args": {"util": "keepBin"}
+                            },
+                            {
+                                "caption": "codingUtils: Keep only hexadecimal",
+                                "command": "codeuti",
+                                "args": {"util": "keepHex"}
+                            },
+                            {
+                                "caption": "codingUtils: Keep only decimal",
+                                "command": "codeuti",
+                                "args": {"util": "keepDec"}
+                            },
+                            {
+                                "caption": "codingUtils: Keep only octal",
+                                "command": "codeuti",
+                                "args": {"util": "keepOct"}
+                            },
+                            {
+                                "caption": "codingUtils: Keep only urls",
+                                "command": "codeuti",
+                                "args": {"util": "keepUrl"}
+                            },
+                            {
+                                "caption": "codingUtils: Remove all identical lines",
+                                "command": "codeuti",
+                                "args": {"util": "remIdcLines"}
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
