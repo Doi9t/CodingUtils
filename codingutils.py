@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sublime, sublime_plugin, string, re
 
 bases = {'binary' : 2,'octal' : 8,'decimal' : 10, 'hexadecimal' : 16};
@@ -7,10 +8,6 @@ class NumberObj(object):
 		self.oldNumber = number;
 		self.number = int(number, bases[base]);
 		self.base = base;
-	def inc(self):
-		self.number += 1;
-	def dec(self):
-		self.number -= 1;
 	def getOldNumber(self):
 		return str(self.oldNumber);
 	def getIntNumber(self):
@@ -58,7 +55,9 @@ class CodeutiCommand(sublime_plugin.TextCommand):
 		elif reg == 'decimal': return re.findall(r'[+-]?\d+(?:\.\d+)?', line);
 		elif reg == 'hexadecimal': return  re.findall(r'(?:0[xX])?[0-9a-fA-F]+', line);
 		elif reg == 'string' : return re.findall(r'[a-zA-Z]+', line);
-		elif reg == 'url' : return re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', line);
+		#Thanks to John Gruber for this awesome regex for urls
+		#http://daringfireball.net/2010/07/improved_regex_for_matching_urls
+		elif reg == 'url' : return re.findall(r"""(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))""", line);
 		else: return [];
 
 	def removeStrings(self, contenue):
@@ -93,6 +92,10 @@ class CodeutiCommand(sublime_plugin.TextCommand):
 
 			if len(urls) != 0:
 				for url in urls:
+					string = url[0].encode('utf-8');
+
+					print(url);
+
 					conteneur.append(url);
 		return conteneur;
 
