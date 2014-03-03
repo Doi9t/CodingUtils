@@ -92,11 +92,9 @@ class CodeutiCommand(sublime_plugin.TextCommand):
 
 			if len(urls) != 0:
 				for url in urls:
-					string = url[0].encode('utf-8');
+					#Remove all non ASCII characters
+					conteneur.append(''.join([x for x in url[0] if ord(x) < 128]));
 
-					print(url);
-
-					conteneur.append(url);
 		return conteneur;
 
 	def removeIdcLines(self, contenue):
