@@ -8,10 +8,6 @@ class NumberObj(object):
 		self.oldNumber = number;
 		self.number = int(number, bases[base]);
 		self.base = base;
-	def getOldNumber(self):
-		return str(self.oldNumber);
-	def getIntNumber(self):
-		return  str(self.number);
 	def getNumber(self):
 		if self.base == 'binary':
 			return removeLetterFromLong(str(bin(self.number)[2:]));
