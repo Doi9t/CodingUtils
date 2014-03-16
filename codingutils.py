@@ -51,9 +51,8 @@ class CodeutiCommand(sublime_plugin.TextCommand):
 		elif reg == 'decimal': return re.findall(r'[+-]?\d+(?:\.\d+)?', line);
 		elif reg == 'hexadecimal': return  re.findall(r'(?:0[xX])?[0-9a-fA-F]+', line);
 		elif reg == 'string' : return re.findall(r'[a-zA-Z]+', line);
-		#Thanks to John Gruber for this awesome regex for urls
-		#http://daringfireball.net/2010/07/improved_regex_for_matching_urls
-		elif reg == 'url' : return re.findall(r"""(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))""", line);
+		#I use a modified regex from John Gruber (https://gist.github.com/gruber/249502)
+		elif reg == 'url' : return re.findall(r"""(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+)+(?:[^\s`!()\[\]{};:'".,<>?«»“”‘’]))""",line);
 		else: return [];
 
 	def removeStrings(self, contenue):
@@ -73,6 +72,7 @@ class CodeutiCommand(sublime_plugin.TextCommand):
 
 	def removeNumbers(self, contenue):
 		conteneur = [];
+
 		for line in contenue:
 			if self.settings.get('put_splitter_between_multiple_strings'):
 				conteneur.append(self.settings.get('splitter_between_multiple_strings').join(self.getArrayFromRegex(line, 'string')));
@@ -84,14 +84,14 @@ class CodeutiCommand(sublime_plugin.TextCommand):
 		conteneur = [];
 
 		for line in contenue:
-			urls = self.getArrayFromRegex(line, 'url');
+			if self.settings.get('put_splitter_between_multiple_urls'):
+				conteneur.append(self.settings.get('splitter_between_multiple_urls').join(self.getArrayFromRegex(line, 'url')));
+			else:
+				conteneur.append(''.join(self.getArrayFromRegex(line, 'url')[0]));
 
-			if len(urls) != 0:
-				for url in urls:
-					#Remove all non ASCII characters
-					conteneur.append(''.join([x for x in url[0] if ord(x) < 128]));
+		print(conteneur);
+		return removeEmptyString(conteneur);
 
-		return conteneur;
 
 	def removeIdcLines(self, contenue):
 		return list(set(contenue));
