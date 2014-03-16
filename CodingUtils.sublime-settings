@@ -1,6 +1,8 @@
 {
     "put_splitter_between_multiple_numbers": true,
-    "splitter_between_multiple_numbers": " - ",
+    "splitter_between_multiple_numbers": " and ",
     "put_splitter_between_multiple_strings": true,
-    "splitter_between_multiple_strings": " - "
+    "splitter_between_multiple_strings": " and ",
+    "put_splitter_between_multiple_urls": true,
+    "splitter_between_multiple_urls": " and "
 } 
