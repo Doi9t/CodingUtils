@@ -87,7 +87,7 @@ class CodeutiCommand(sublime_plugin.TextCommand):
 			if self.settings.get('put_splitter_between_multiple_urls'):
 				conteneur.append(self.settings.get('splitter_between_multiple_urls').join(self.getArrayFromRegex(line, 'url')));
 			else:
-				conteneur.append(''.join(self.getArrayFromRegex(line, 'url')[0]));
+				conteneur.append(''.join(self.getArrayFromRegex(line, 'url')));
 		return removeEmptyString(conteneur);
 
 
